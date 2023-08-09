@@ -1,3 +1,3 @@
 ## Sequelize
 
--- Working with sequelize ORM.
+- Working with sequelize ORM.
