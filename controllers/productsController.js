@@ -1,5 +1,4 @@
 const { Product } = require("../model");
-const product = require("../model/product");
 
 async function getProducts(req, res) {
   const products = await Product.findAll({});
@@ -45,7 +44,7 @@ async function updateProduct(req, res) {
 async function deleteProduct(req, res) {
   try {
     const product = await Product.destroy({ where: { id: req.params.id } });
-    
+
     res.json({ status: true, product });
   } catch (error) {
     console.log(error);
