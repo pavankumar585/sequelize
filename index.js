@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
-const todos = require("./routes/todos");
+const products = require("./routes/products");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/todos", todos);
+app.use("/api/products", products);
 
 const port = process.env.PORT || 9000;
 app.listen(port, () => {
