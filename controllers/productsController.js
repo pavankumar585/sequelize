@@ -1,9 +1,25 @@
 const { Product } = require("../model");
 
 async function getProducts(req, res) {
-  const products = await Product.findAll({});
+  try {
+    const products = await Product.findAll({});
 
-  res.json({ status: true, products });
+    res.json({ status: true, products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: false, message: error.message });
+  }
+}
+
+async function getPublishedProducts(req, res) {
+  try {
+    const products = await Product.findAll({ where: { isPublished: true } });
+
+    res.json({ status: true, products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: false, message: error.message });
+  }
 }
 
 async function getProduct(req, res) {
@@ -58,4 +74,5 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  getPublishedProducts
 };

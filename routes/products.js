@@ -7,6 +7,8 @@ router
   .get(productsController.getProducts)
   .post(productsController.createProduct);
 
+router.route("/find/published").get(productsController.getPublishedProducts);
+
 router
   .route("/:id")
   .get(productsController.getProduct)
