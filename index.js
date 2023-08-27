@@ -1,15 +1,24 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-
-const products = require("./routes/products");
+const { sequelize } = require("./models");
+const error = require("./middleware/error");
+const users = require("./routes/users");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/products", products);
+app.use("/api/users", users);
+app.use(error);
 
 const port = process.env.PORT || 9000;
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(port, async (req, res) => {
+  try {
+    console.log(`Server is running on port ${port}`);
+
+    await sequelize.authenticate();
+    console.log("Database connection established");
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
 });
