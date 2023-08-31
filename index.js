@@ -4,11 +4,13 @@ require("dotenv").config();
 const { sequelize } = require("./models");
 const error = require("./middleware/error");
 const users = require("./routes/users");
+const posts = require("./routes/posts");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", users);
+app.use("/api/posts", posts);
 app.use(error);
 
 const port = process.env.PORT || 9000;

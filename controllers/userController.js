@@ -22,4 +22,16 @@ async function getUsers(req, res) {
   }
 }
 
-module.exports = { createUser, getUsers };
+async function getUser(req, res) {
+  const uuid = req.params.uuid;
+  try {
+    const user = await User.findOne({ where: { uuid } });
+    
+    res.json({ status: true, user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: false, message: error.message });
+  }
+}
+
+module.exports = { createUser, getUsers, getUser };
