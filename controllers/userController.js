@@ -13,7 +13,7 @@ async function createUser(req, res) {
 
 async function getUsers(req, res) {
   try {
-    const users = await User.findAll({});
+    const users = await User.findAll({ include: "post" });
     
     res.json({ status: true, users });
   } catch (error) {
@@ -25,7 +25,7 @@ async function getUsers(req, res) {
 async function getUser(req, res) {
   const uuid = req.params.uuid;
   try {
-    const user = await User.findOne({ where: { uuid } });
+    const user = await User.findOne({ where: { uuid }, include: "post" });
     
     res.json({ status: true, user });
   } catch (error) {
